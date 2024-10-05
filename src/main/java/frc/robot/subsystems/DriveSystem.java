@@ -2,6 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+//this whole file works fine. no issues here. /gen 
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -49,4 +50,11 @@ public class DriveSystem extends SubsystemBase {
   public void drive(double xVelocity, double yVelocity, double rotationVelocity) {
     mecanumDrive.driveCartesian(yVelocity, xVelocity, rotationVelocity);
   }
+  public void stopDrive() {
+    frontLeft.stopMotor();
+    frontRight.stopMotor();
+    rearLeft.stopMotor();
+    rearRight.stopMotor();
+  }
 }
+
