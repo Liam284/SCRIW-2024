@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.math.MathUtil;
 import static frc.robot.Constants.DriveConstants.*;
@@ -34,6 +35,14 @@ public class DriveSystem extends SubsystemBase {
     rearLeft = new CANSparkMax(REARLEFT, MotorType.kBrushless);
     frontRight = new CANSparkMax(FRONTRIGHT, MotorType.kBrushless);
     rearRight = new CANSparkMax(REARRIGHT, MotorType.kBrushless);
+
+    frontLeft.setIdleMode(IdleMode.kBrake);
+    rearLeft.setIdleMode(IdleMode.kBrake);
+    frontRight.setIdleMode(IdleMode.kBrake);
+    rearRight.setIdleMode(IdleMode.kBrake);
+
+
+
     mecanumDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
     joy = new Joystick(JOYSTICK_PORT);
     frontRight.setInverted(true);

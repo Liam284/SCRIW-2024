@@ -37,9 +37,9 @@ public class DriveWithJoystick extends Command {
   @Override
   public void execute() {
 
-    x = MathUtil.applyDeadband(joy.getX(), 0.17);
-    y = MathUtil.applyDeadband(joy.getY(), 0.17);
-    z = MathUtil.applyDeadband(joy.getZ(), 0.17);
+    x = MathUtil.applyDeadband(joy.getX(), 0.18);
+    y = MathUtil.applyDeadband(joy.getY(), 0.18);
+    z = MathUtil.applyDeadband(joy.getZ(), 0.19);
 
     drive.drive(-x, y, -z);
   }

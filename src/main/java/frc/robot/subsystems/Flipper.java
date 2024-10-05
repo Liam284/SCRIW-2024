@@ -12,7 +12,10 @@ import com.revrobotics.CANSparkMax;
 //import com.revrobotics.SparkPIDController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -44,7 +47,8 @@ public class Flipper extends SubsystemBase {
     //flipperPID.setFF(0.5);
     //flipperPID.setSmartMotionAllowedClosedLoopError(100, 0);
     //flipperPID.setOutputRange(0, 5000);
-    throughBore = new DutyCycleEncoder(10);
+    throughBore = new DutyCycleEncoder(9);
+    // throughBore.setConnectedFrequencyThreshold(50);
 
     
 
@@ -56,7 +60,10 @@ public class Flipper extends SubsystemBase {
   public void flip(double speed){
       flipperMotor.set(speed);
     }
-
+  public int getChannel()
+  {
+    return throughBore.getSourceChannel();
+  }
 public DutyCycleEncoder getthroughBore(){
   return throughBore;
 }
@@ -68,5 +75,7 @@ public DutyCycleEncoder getthroughBore(){
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Throughbore angle", throughBore.getAbsolutePosition());
+    System.out.println(throughBore.isConnected());
   }
 }

@@ -6,10 +6,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Flipper;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
+import static frc.robot.Constants.AngleConstants.AMP_ANGLE;
+import static frc.robot.Constants.AngleConstants.STARTING_ANGLE;
 import static frc.robot.Constants.DriveConstants.*;
 
 public class MoveFlipperToPosition extends Command {
@@ -32,16 +35,8 @@ public class MoveFlipperToPosition extends Command {
 
     this.angle = angle;
     this.flipper = flipper; 
+    pidController = new PIDController(0.04,0 ,0.005);
     addRequirements(flipper);
-
-    //change numbers after testing
-    pidController = new PIDController(
-     
-      0.045,
-      0.005, 
-      0.000
-    );
-    
     pidController.reset();
     pidController.setTolerance(2);
     
@@ -52,7 +47,7 @@ public class MoveFlipperToPosition extends Command {
   public void initialize() {
   pidController.enableContinuousInput(0, 360);
    
-  start = 0;
+  start = STARTING_ANGLE;
 
   end = start + angle;
   }
@@ -63,19 +58,24 @@ public class MoveFlipperToPosition extends Command {
   public void execute() {
     double currentPosition = flipper.getthroughBore().getAbsolutePosition();
     double speed = pidController.calculate(currentPosition, angle);
+
+    speed = MathUtil.clamp(speed, -1, 1);
+    goingDown = currentPosition < angle;
     pidController.setSetpoint(end);
     
-    double rotationSpeed = pidController.calculate(current, end);
+    double rotationSpeed = pidController.calculate(currentPosition, end);
+
+    flipper.flip(rotationSpeed/1.5);
 
     goingDown = currentPosition < angle;
-
-    //make the angle a constant
-    if(goingDown && currentPosition < 134.4)
-      flipper.flip(speed);
-
-    else if (!goingDown && currentPosition > 21)
-      flipper.flip(speed);
     
+    //make the angle a constant
+    if (goingDown && currentPosition < STARTING_ANGLE) { 
+      flipper.flip(speed);
+    }
+    else if (!goingDown && currentPosition > AMP_ANGLE){
+      flipper.flip(speed);
+    }
     }
 
     

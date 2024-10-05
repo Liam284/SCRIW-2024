@@ -28,7 +28,7 @@ public final class Constants {
   }
   public static class AngleConstants {
     public static final double STARTING_ANGLE = 21;
-    public static final double FEED_ANGLE = 54.6;
-    public static final double AMP_ANGLE = 134.4;
+    public static final double FEED_ANGLE = 33.6;
+    public static final double AMP_ANGLE = 113.4;
   }
 }

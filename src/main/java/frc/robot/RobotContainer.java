@@ -9,9 +9,7 @@ import static frc.robot.Constants.OperatorConstants.*;
 import static frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveWithJoystick;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.MoveFlipperToPosition;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.DriveSystem;
 import frc.robot.subsystems.Flipper;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -31,9 +30,8 @@ import edu.wpi.first.wpilibj.XboxController;
 public class RobotContainer {
 
   private Joystick joy;
-  private ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private CommandXboxController m_driverController;
+  //private CommandXboxController m_driverController;
   private MoveFlipperToPosition moveToStart;
   private MoveFlipperToPosition moveToFeed;
   private MoveFlipperToPosition moveToAmp;
@@ -41,6 +39,7 @@ public class RobotContainer {
   private POVButton startingPosition;
   private POVButton feed;
   private POVButton amp;
+  private POVButton print;
 
   private Flipper flipper;
   private double angle;
@@ -55,9 +54,10 @@ public class RobotContainer {
     mecanumDrive = new DriveSystem();
 
     flipper = new Flipper();
-    moveToStart = new MoveFlipperToPosition(STARTING_ANGLE, flipper);
-    moveToFeed = new MoveFlipperToPosition(FEED_ANGLE, flipper);
-    moveToAmp = new MoveFlipperToPosition(AMP_ANGLE, flipper);
+    moveToStart = new MoveFlipperToPosition(-21, flipper);
+    moveToFeed = new MoveFlipperToPosition(-28.7, flipper);
+    moveToAmp = new MoveFlipperToPosition(-34 , flipper);
+
 
     
 
@@ -68,8 +68,9 @@ public class RobotContainer {
     
 
     startingPosition = new POVButton(operator, 0);
-    feed = new POVButton(operator, 90);
+    feed = new POVButton(operator, 270);
     amp = new POVButton(operator, 180);
+    print = new POVButton(operator, 90);
 
     configureBindings();
   }
@@ -84,10 +85,6 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition).onTrue(new ExampleCommand(m_exampleSubsystem));
-    //startingPosition.onTrue(Flipper.flip);
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     startingPosition.onTrue(moveToStart);
     feed.onTrue(moveToFeed);
     amp.onTrue(moveToAmp);
@@ -98,10 +95,10 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
-  }
+  // public Command getAutonomousCommand() {
+  //   // An example command will be run in autonomous
+  //   //return Autos.exampleAuto(m_exampleSubsystem);
+  // }
 
   public Joystick getJoy() {
     
