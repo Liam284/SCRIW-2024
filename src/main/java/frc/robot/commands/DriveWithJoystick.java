@@ -41,7 +41,7 @@ public class DriveWithJoystick extends Command {
     y = MathUtil.applyDeadband(joy.getY(), 0.18);
     z = MathUtil.applyDeadband(joy.getZ(), 0.19);
 
-    drive.drive(-x, y, -z);
+    drive.drive(-x/2, y/2, -z/2);
   }
 
   // Called once the command ends or is interrupted.

@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -41,6 +43,9 @@ public class DriveSystem extends SubsystemBase {
     frontRight.setIdleMode(IdleMode.kBrake);
     rearRight.setIdleMode(IdleMode.kBrake);
 
+    rearLeft.setSmartCurrentLimit(100);
+    double current = rearLeft.getOutputCurrent();
+
 
 
     mecanumDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
@@ -51,7 +56,7 @@ public class DriveSystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Current", rearLeft.getOutputCurrent());
   }
 
 

@@ -35,8 +35,11 @@ public class MoveFlipperToPosition extends Command {
 
     this.angle = angle;
     this.flipper = flipper; 
+
     pidController = new PIDController(0.04,0 ,0.005);
+
     addRequirements(flipper);
+
     pidController.reset();
     pidController.setTolerance(2);
     
@@ -60,9 +63,10 @@ public class MoveFlipperToPosition extends Command {
     double speed = pidController.calculate(currentPosition, angle);
 
     speed = MathUtil.clamp(speed, -1, 1);
+
     goingDown = currentPosition < angle;
+
     pidController.setSetpoint(end);
-    
     double rotationSpeed = pidController.calculate(currentPosition, end);
 
     flipper.flip(rotationSpeed/1.5);
@@ -70,9 +74,10 @@ public class MoveFlipperToPosition extends Command {
     goingDown = currentPosition < angle;
     
     //make the angle a constant
-    if (goingDown && currentPosition < STARTING_ANGLE) { 
+    if (goingDown && currentPosition < STARTING_ANGLE){ 
       flipper.flip(speed);
     }
+
     else if (!goingDown && currentPosition > AMP_ANGLE){
       flipper.flip(speed);
     }
