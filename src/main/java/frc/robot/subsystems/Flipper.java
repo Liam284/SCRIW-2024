@@ -12,6 +12,7 @@ import com.revrobotics.CANSparkMax;
 //import com.revrobotics.SparkPIDController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+// import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -23,6 +24,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriveConstants.*;
 import frc.robot.commands.MoveFlipperToPosition;
 import frc.robot.Constants.DriveConstants;
+
+import frc.robot.commands.MoveFlipperToPosition.*;
+import frc.robot.commands.MoveFlipperToPosition;
 
 public class Flipper extends SubsystemBase {
 
@@ -76,6 +80,7 @@ public DutyCycleEncoder getthroughBore(){
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Throughbore angle", throughBore.getAbsolutePosition());
-    System.out.println(throughBore.isConnected());
+    // SmartDashboard.putNumber("Angle: ", angle);
+    //System.out.println(throughBore.isConnected());
   }
 }

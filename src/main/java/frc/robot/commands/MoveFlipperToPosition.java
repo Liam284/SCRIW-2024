@@ -26,7 +26,7 @@ public class MoveFlipperToPosition extends Command {
   private double angle;
   private double current;
 
-  private boolean goingDown;
+  private boolean movingToAmp;
 
   /** Creates a new RotateToAngle. */
 
@@ -36,7 +36,7 @@ public class MoveFlipperToPosition extends Command {
     this.angle = angle;
     this.flipper = flipper; 
 
-    pidController = new PIDController(0.04,0 ,0.005);
+    pidController = new PIDController(0.045,0 ,0.005);
 
     addRequirements(flipper);
 
@@ -62,24 +62,27 @@ public class MoveFlipperToPosition extends Command {
     double currentPosition = flipper.getthroughBore().getAbsolutePosition();
     double speed = pidController.calculate(currentPosition, angle);
 
-    speed = MathUtil.clamp(speed, -1, 1);
+    //speed = MathUtil.clamp(speed, -1, 1);
 
-    goingDown = currentPosition < angle;
+    movingToAmp = currentPosition < angle;
 
     pidController.setSetpoint(end);
     double rotationSpeed = pidController.calculate(currentPosition, end);
 
-    flipper.flip(rotationSpeed/1.5);
+    //flipper.flip(rotationSpeed);
 
-    goingDown = currentPosition < angle;
+    //inspect??????
+    movingToAmp = currentPosition >= angle;
     
     //make the angle a constant
-    if (goingDown && currentPosition < STARTING_ANGLE){ 
+    if (movingToAmp && currentPosition > angle){ 
       flipper.flip(speed);
+      System.out.println(speed);
     }
 
-    else if (!goingDown && currentPosition > AMP_ANGLE){
+    else if (!movingToAmp && currentPosition < angle){
       flipper.flip(speed);
+      System.out.println(speed);
     }
     }
 

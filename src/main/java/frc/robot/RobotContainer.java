@@ -54,9 +54,9 @@ public class RobotContainer {
     mecanumDrive = new DriveSystem();
 
     flipper = new Flipper();
-    moveToStart = new MoveFlipperToPosition(-21, flipper);
-    moveToFeed = new MoveFlipperToPosition(-28.7, flipper);
-    moveToAmp = new MoveFlipperToPosition(-34 , flipper);
+    moveToStart = new MoveFlipperToPosition(0.24, flipper);
+    moveToFeed = new MoveFlipperToPosition(0.36, flipper);
+    moveToAmp = new MoveFlipperToPosition(0.56 , flipper);
 
 
     
@@ -72,6 +72,7 @@ public class RobotContainer {
     amp = new POVButton(operator, 180);
     print = new POVButton(operator, 90);
 
+    SmartDashboard.putNumber("Angle:", angle);
     configureBindings();
   }
  
