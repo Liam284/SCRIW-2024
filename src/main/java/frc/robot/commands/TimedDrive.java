@@ -35,7 +35,7 @@ public class TimedDrive extends Command {
     driveSystem.stopDrive(); //Cannot make a static reference to the non-static method stopDrive() from the type DriveSystemJava(603979977)
   }
 
-  // Returns true when the command should end.
+   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;
