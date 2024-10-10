@@ -18,21 +18,21 @@ public class TimedDrive extends Command {
    */
   public TimedDrive(double y) {
     Y = y;
-    driveSystem = DriveSystem.DriveSystem(); //The method DriveSystem() is undefined for the type TimedDriveJava(67108964)
+    driveSystem = driveSystem.DriveSystem(); //The method DriveSystem() is undefined for the type TimedDriveJava(67108964)
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
  
   @Override
   public void execute() {
-    DriveSystem.drive(0,1,0); //Cannot make a static reference to the non-static method drive(double, double, double) from the type DriveSystemJava(603979977)
+    driveSystem.drive(0,1,0); //Cannot make a static reference to the non-static method drive(double, double, double) from the type DriveSystemJava(603979977)
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    DriveSystem.stopDrive(); //Cannot make a static reference to the non-static method stopDrive() from the type DriveSystemJava(603979977)
+    driveSystem.stopDrive(); //Cannot make a static reference to the non-static method stopDrive() from the type DriveSystemJava(603979977)
   }
 
   // Returns true when the command should end.
