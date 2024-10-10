@@ -18,6 +18,7 @@ public final class Constants {
     public static final int REARLEFT = 3;
     public static final int FRONTRIGHT = 1;
     public static final int REARRIGHT = 4;
+    public static final int MAXDRIVESPEED= 1;
 
     //subject to change;
     public static final int FLIPPER_ID = 5;

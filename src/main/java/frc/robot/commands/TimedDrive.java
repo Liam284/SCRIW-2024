@@ -18,17 +18,11 @@ public class TimedDrive extends Command {
    */
   public TimedDrive(double y) {
     Y = y;
-    driveSystem = DriveSystem(); //The method DriveSystem() is undefined for the type TimedDriveJava(67108964)
+    driveSystem = DriveSystem.DriveSystem(); //The method DriveSystem() is undefined for the type TimedDriveJava(67108964)
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
+ 
   @Override
   public void execute() {
     DriveSystem.drive(0,1,0); //Cannot make a static reference to the non-static method drive(double, double, double) from the type DriveSystemJava(603979977)

@@ -20,11 +20,11 @@ import frc.robot.RobotContainer;
 
 public class DriveSystem extends SubsystemBase {
 
-  private CANSparkMax frontLeft;
-  private CANSparkMax rearLeft;
-  private CANSparkMax frontRight;
-  private CANSparkMax rearRight;
-  private MecanumDrive mecanumDrive;
+  private static CANSparkMax frontLeft;
+  private static CANSparkMax rearLeft;
+  private static CANSparkMax frontRight;
+  private static CANSparkMax rearRight;
+  private static MecanumDrive mecanumDrive;
 
   private Joystick joy;
 
@@ -47,14 +47,19 @@ public class DriveSystem extends SubsystemBase {
   }
 
 
-  public void drive(double xVelocity, double yVelocity, double rotationVelocity) {
+  public static void drive(double xVelocity, double yVelocity, double rotationVelocity) {
     mecanumDrive.driveCartesian(yVelocity, xVelocity, rotationVelocity);
   }
-  public void stopDrive() {
+  public static void stopDrive() {
     frontLeft.stopMotor();
     frontRight.stopMotor();
     rearLeft.stopMotor();
     rearRight.stopMotor();
   }
+
+public static DriveSystem DriveSystem() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'DriveSystem'");
+}
 }
 
