@@ -80,7 +80,5 @@ public DutyCycleEncoder getthroughBore(){
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Throughbore angle", throughBore.getAbsolutePosition());
-    // SmartDashboard.putNumber("Angle: ", angle);
-    //System.out.println(throughBore.isConnected());
   }
 }

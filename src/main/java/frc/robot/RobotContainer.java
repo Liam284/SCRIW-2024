@@ -54,9 +54,9 @@ public class RobotContainer {
     mecanumDrive = new DriveSystem();
 
     flipper = new Flipper();
-    moveToStart = new MoveFlipperToPosition(0.24, flipper);
-    moveToFeed = new MoveFlipperToPosition(0.36, flipper);
-    moveToAmp = new MoveFlipperToPosition(0.56 , flipper);
+    moveToStart = new MoveFlipperToPosition(0.26, flipper);
+    moveToFeed = new MoveFlipperToPosition(0.38, flipper);
+    moveToAmp = new MoveFlipperToPosition(0.57, flipper);
 
 
     

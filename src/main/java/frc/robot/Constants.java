@@ -27,8 +27,8 @@ public final class Constants {
     public static final int OPERATOR_PORT = 1;
   }
   public static class AngleConstants {
-    public static final double STARTING_ANGLE = 0.24;
+    public static final double STARTING_ANGLE = 0.25;
     public static final double FEED_ANGLE = 0.36;
-    public static final double AMP_ANGLE = 0.56;
+    public static final double AMP_ANGLE = 0.57;
   }
 }

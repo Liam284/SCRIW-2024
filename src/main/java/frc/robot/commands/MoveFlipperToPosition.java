@@ -36,19 +36,19 @@ public class MoveFlipperToPosition extends Command {
     this.angle = angle;
     this.flipper = flipper; 
 
-    pidController = new PIDController(0.045,0 ,0.005);
+    pidController = new PIDController(2,0 ,0.005);
 
     addRequirements(flipper);
 
     pidController.reset();
-    pidController.setTolerance(2);
+    pidController.setTolerance(.05);
     
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  pidController.enableContinuousInput(0, 360);
+  // pidController.enableContinuousInput(0.25, 0.6);
    
   start = STARTING_ANGLE;
 
@@ -60,29 +60,31 @@ public class MoveFlipperToPosition extends Command {
   @Override
   public void execute() {
     double currentPosition = flipper.getthroughBore().getAbsolutePosition();
-    double speed = pidController.calculate(currentPosition, angle);
+    double speed = -pidController.calculate(currentPosition, angle);
 
     //speed = MathUtil.clamp(speed, -1, 1);
 
-    movingToAmp = currentPosition < angle;
+    //movingToAmp = currentPosition < angle;
 
-    pidController.setSetpoint(end);
-    double rotationSpeed = pidController.calculate(currentPosition, end);
+    //pidController.setSetpoint(end);
+    //double rotationSpeed = pidController.calculate(currentPosition, end);
 
     //flipper.flip(rotationSpeed);
 
     //inspect??????
-    movingToAmp = currentPosition >= angle;
+    movingToAmp = currentPosition < angle;
     
     //make the angle a constant
-    if (movingToAmp && currentPosition > angle){ 
+    if (speed<0 && currentPosition < AMP_ANGLE){ 
       flipper.flip(speed);
       System.out.println(speed);
+      System.out.println("moving up");
     }
 
-    else if (!movingToAmp && currentPosition < angle){
+    else if (speed>0 && currentPosition > STARTING_ANGLE){
       flipper.flip(speed);
       System.out.println(speed);
+      System.out.println("moving down");
     }
     }
 
