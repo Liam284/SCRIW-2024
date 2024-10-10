@@ -14,8 +14,9 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 public final class Autos {
   /** Example static factory for an autonomous command. */
   public static Command exampleAuto(DriveSystem driveSystem) {
-    return new RunCommand((() -> driveSystem.drive(1,1,0)))
-    .andThen(new RunCommand(() -> driveSystem.drive(1, 1, 0)))
+    return new RunCommand((() -> Flipper.flip(-.25)))
+    .withTimeout(.1)
+    .andThen(new RunCommand(() -> driveSystem.drive(Math.cos(Math.PI/4), Math.sin(Math.PI/4), 0)))
     .withTimeout(3);
   }
 
